@@ -2,10 +2,10 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Component({
-    selector: 'fetchdata',
-    template: require('./fetchdata.component.html')
+    selector: 'contestants',
+    template: require('./contestants.component.html')
 })
-export class FetchDataComponent implements AfterViewInit {
+export class ContestantsComponent implements AfterViewInit {
     public forecasts: WeatherForecast[];
 
     constructor(private http: Http) {
