@@ -1,1 +1,23 @@
-<h1>Contestant page</h1>
+<div class="container-fluid">
+    <h2>The Contestants</h2><em>Click and Save to show as eliminated: </em>
+    <button class="btn btn-default" (click)="saveChanges()">Save Changes</button>
+    <div *ngFor="let contestant of contestants">
+        <div class="text-center">
+            <h4>{{contestant.name}}</h4>
+            <button class="img-button" (click)="toggleContestant(contestant)"><img class="img-responsive" [attr.src]="contestant.imageSource" alt="No Image" /></button>
+            <div *ngIf="!contestant.isActive" class="text-danger">Eliminated!</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    img {
+        height: 125px;
+        width: 300px;
+    }
+
+    .img-button {
+        background-color: transparent;
+        border: none;
+    }
+</style>

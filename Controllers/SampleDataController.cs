@@ -2,43 +2,53 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BachelorApplication.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BachelorApplication.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
+        private readonly BachelorContext _context;
+        public SampleDataController(BachelorContext context)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+            _context = context;
+        }
+        
 
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public async Task<IEnumerable<Contestant>> GetContestants()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+            var constestants = await _context.Contestants.ToListAsync();
+            var users = await _context.Users.ToListAsync();
+            var picks = await _context.Picks.ToListAsync();
+            return constestants;
         }
 
-        public class WeatherForecast
+        [HttpPost("PostChanges")]
+        public async Task<JsonResult> PostChanges([FromBody] List<Contestant> contestants)
         {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
+            foreach (var contestant in contestants)
             {
-                get
+                var lookup = await _context.Contestants.FirstOrDefaultAsync(x => x.ContestantId == contestant.ContestantId);
+                if (lookup.IsActive != contestant.IsActive)
                 {
-                    return 32 + (int)(TemperatureC / 0.5556);
+                    lookup.IsActive = contestant.IsActive;
                 }
             }
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json($"Error! {ex}");
+            }
+
+            return Json("Saved Successfully!");
         }
     }
 }
