@@ -20,6 +20,7 @@ export class ContestantsComponent implements AfterViewInit {
 
     toggleContestant(contestant: Contestant): void {
         contestant.isActive = !contestant.isActive;
+        contestant.hasChanged = true;
     }
 
     saveChanges(): void {
@@ -42,4 +43,5 @@ interface Contestant {
     name: string;
     imageSource: string;
     isActive: boolean;
+    hasChanged: boolean;
 }

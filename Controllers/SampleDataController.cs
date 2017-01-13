@@ -30,10 +30,14 @@ namespace BachelorApplication.Controllers
         {
             foreach (var contestant in contestants)
             {
-                var lookup = await _context.Contestants.FirstOrDefaultAsync(x => x.ContestantId == contestant.ContestantId);
-                if (lookup.IsActive != contestant.IsActive)
+                if (contestant.HasChanged)
                 {
-                    lookup.IsActive = contestant.IsActive;
+                    var lookup =
+                        await _context.Contestants.FirstOrDefaultAsync(x => x.ContestantId == contestant.ContestantId);
+                    if (lookup.IsActive != contestant.IsActive)
+                    {
+                        lookup.IsActive = contestant.IsActive;
+                    }
                 }
             }
 
