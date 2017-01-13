@@ -6,7 +6,7 @@
                 <h3>{{user?.username}}'s Picks: </h3>
                 <div *ngFor="let contestant of user.contestants">
                     <div class="contestant">
-                        <img class="img-responsive" [attr.src]="contestant.imageSource" alt="No Image" style="height: 125px; width: 300px"/>
+                        <img class="img-responsive"  [attr.src]="contestant.imageSource" [style.opacity]="contestant.isActive ? '1' :'0.4'" alt="No Image" style="height: 125px; width: 300px"/>
                         <span>{{contestant?.name}}</span>
                         <span *ngIf="!contestant.isActive" class="text-danger">Eliminated!</span>
                     </div>
