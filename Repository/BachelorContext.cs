@@ -15,16 +15,11 @@ namespace BachelorApplication.Repository
         public DbSet<Contestant> Contestants { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Pick> Picks { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Contestant>().ToTable("Contestants");
+            modelBuilder.Entity<Contestant>().ToTable("Contestants")
+                .HasOne(p => p.User).WithMany(x => x.Contestants);
             modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<Pick>().ToTable("Picks")
-                .HasOne(p => p.Contestant).WithMany(x => x.Picks);
-
-            modelBuilder.Entity<Pick>().HasOne(p => p.User).WithMany(x => x.Picks);
         }
     }
 }

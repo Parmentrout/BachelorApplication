@@ -10,7 +10,7 @@ namespace BachelorApplication.Repository
     { 
         public User()
         {
-            Picks = new List<Pick>();
+            Contestants = new List<Contestant>();
         }
 
         [Key]
@@ -18,6 +18,6 @@ namespace BachelorApplication.Repository
 
         public string Username { get; set; }
 
-        public virtual ICollection<Pick> Picks { get; set; } // Picks.FK_Picks_Users
+        public virtual ICollection<Contestant> Contestants { get; set; } // Picks.FK_Picks_Users
     }
 }

@@ -3,9 +3,8 @@
     <button class="btn btn-default" (click)="saveChanges()">Save Changes</button>
     <div *ngFor="let contestant of contestants">
         <div class="text-center">
-            <h4>{{contestant.name}}</h4>
             <button class="img-button" (click)="toggleContestant(contestant)"><img class="img-responsive" [attr.src]="contestant.imageSource" alt="No Image" /></button>
-            <div *ngIf="!contestant.isActive" class="text-danger">Eliminated!</div>
+            <h4>{{contestant.name}}<span *ngIf="!contestant.isActive" class="text-danger"> - Eliminated!</span></h4>
         </div>
     </div>
 </div>

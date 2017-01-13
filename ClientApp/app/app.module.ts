@@ -4,6 +4,7 @@ import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
+import { FantasyComponent } from './components/fantasy/fantasy.component';
 import { ContestantsComponent } from './components/contestants/contestants.component';
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ContestantsComponent } from './components/contestants/contestants.compo
         AppComponent,
         NavMenuComponent,
         ContestantsComponent,
-        HomeComponent
+        HomeComponent,
+        FantasyComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -20,6 +22,7 @@ import { ContestantsComponent } from './components/contestants/contestants.compo
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'contestants', component: ContestantsComponent },
+            { path: 'fantasy', component: FantasyComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -12,7 +12,6 @@ namespace BachelorApplication.Repository
         public Contestant()
         {
             IsActive = true;
-            Picks = new List<Pick>();
         }
 
         [Key]
@@ -24,6 +23,6 @@ namespace BachelorApplication.Repository
 
         public bool IsActive { get; set; }
 
-        public virtual ICollection<Pick> Picks { get; set; } // Picks.FK_Picks_Contestants
+        public virtual User User { get; set; }
     }
 }

@@ -22,8 +22,6 @@ namespace BachelorApplication.Controllers
         public async Task<IEnumerable<Contestant>> GetContestants()
         {
             var constestants = await _context.Contestants.ToListAsync();
-            var users = await _context.Users.ToListAsync();
-            var picks = await _context.Picks.ToListAsync();
             return constestants;
         }
 
@@ -50,5 +48,20 @@ namespace BachelorApplication.Controllers
 
             return Json("Saved Successfully!");
         }
+
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var contestants = await _context.Contestants.ToListAsync();
+            var users = await _context.Users.Where(u => u.Username != "Unassigned").ToListAsync();
+
+            return users;
+        }
     }
+}
+
+class FantasyViewModel
+{
+    public string UserName { get; set; }
+    public List<Contestant> Contestants { get; set; }
 }
