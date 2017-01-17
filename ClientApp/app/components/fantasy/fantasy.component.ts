@@ -1,17 +1,19 @@
 ﻿import { Component, AfterViewInit } from '@angular/core';
 import { Http } from '@angular/http';
+import Usercomponent = require("../../models/user.component");
 
 @Component({
     selector: 'fantasy',
     template: require('./fantasy.component.html')
 })
 export class FantasyComponent implements AfterViewInit {
-    fantasyUsers: User[];
+    fantasyUsers: Usercomponent.User[];
     constructor(private http: Http) {
 
     }
 
     ngAfterViewInit(): void {
+
         this.http.get('/api/SampleData/GetUsers').subscribe(result => {
             this.fantasyUsers = result.json();
 
@@ -20,15 +22,4 @@ export class FantasyComponent implements AfterViewInit {
             }
         });
     }
-}
-
-class User {
-    username: string;
-    contestants: Contestant[];
-}
-
-class Contestant {
-    name: string;
-    imageSource: string;
-    isActive: boolean;
 }

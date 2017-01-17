@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { ContestantsService } from '../../services/contestants.service';
+import { Contestant } from '../../models/contestant.component';
 
 @Component({
     selector: 'contestants',
@@ -8,14 +10,13 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 export class ContestantsComponent implements AfterViewInit {
     public contestants: Contestant[];
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private _cService: ContestantsService) {
        
     }
 
     ngAfterViewInit(): void {
-        this.http.get('/api/SampleData/GetContestants').subscribe(result => {
-            this.contestants = result.json();
-        });
+        this._cService.getContestants()
+            .subscribe(result => this.contestants = result);
     }
 
     toggleContestant(contestant: Contestant): void {
@@ -28,20 +29,7 @@ export class ContestantsComponent implements AfterViewInit {
         //    console.log(contestant.name + '; ' + contestant.isActive);
         //}
 
-
-        let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
-        let options = new RequestOptions({ headers: headers });
-
-        this.http.post('/api/SampleData/PostChanges', this.contestants, options)
-            .subscribe(result => {
-                alert(result.json());
-            });
+        this._cService.saveContestants(this.contestants);
+       
     }
-}
-
-interface Contestant {
-    name: string;
-    imageSource: string;
-    isActive: boolean;
-    hasChanged: boolean;
 }

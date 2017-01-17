@@ -6,6 +6,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FantasyComponent } from './components/fantasy/fantasy.component';
 import { ContestantsComponent } from './components/contestants/contestants.component';
+import { ContestantsService } from './services/contestants.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -25,7 +26,8 @@ import { ContestantsComponent } from './components/contestants/contestants.compo
             { path: 'fantasy', component: FantasyComponent },
             { path: '**', redirectTo: 'home' }
         ])
-    ]
+    ],
+    providers: [ContestantsService]
 })
 export class AppModule {
 }
