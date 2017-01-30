@@ -25,9 +25,6 @@ export class ContestantsComponent implements AfterViewInit {
     }
 
     saveChanges(): void {
-        //for (let contestant of this.contestants) {
-        //    console.log(contestant.name + '; ' + contestant.isActive);
-        //}
 
         this._cService.saveContestants(this.contestants);
        

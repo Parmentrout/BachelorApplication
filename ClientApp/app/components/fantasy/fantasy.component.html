@@ -6,12 +6,24 @@
                 <h3>{{user?.username}}'s Picks: </h3>
                 <div *ngFor="let contestant of user.contestants">
                     <div class="contestant">
-                        <img class="img-responsive" [attr.src]="contestant.imageSource" [style.opacity]="contestant.isActive ? '1' :'0.4'" alt="No Image" style="height: 125px; width: 300px" />
+                        <img class="img-responsive" [attr.src]="contestant.imageSource" [style.opacity]="contestant.isActive ? '1' :'0.4'" alt="No Image" style="height: 125px; width: 300px"/>
                         <h4>{{contestant.name}}<span *ngIf="!contestant.isActive" class="text-danger"> - Eliminated!</span></h4>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <h4>Winner Gets: </h4>
+        <p>Choose the drinks for the next premier</p>
+    </div>
+    <div class="row">
+        <h4>Next Bachelorette Pick:</h4>
+        <p>5 bucks</p>
+    </div>
+    <div class="row">
+        <h4>Also...</h4>
+        <em>Your face</em>
     </div>
 </div>
 
