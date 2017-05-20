@@ -3,4 +3,5 @@
     imageSource: string;
     isActive: boolean;
     hasChanged: boolean;
+    userName: string;
 }

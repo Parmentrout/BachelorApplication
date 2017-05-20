@@ -61,6 +61,35 @@ namespace BachelorApplication.Controllers
 
             return users;
         }
+
+        [HttpPost("SaveFantasy")]
+        public JsonResult SaveFantasy([FromBody] Contestant contestant)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Username == contestant.UserName);
+            var cont = _context.Contestants.FirstOrDefault(c => c.Name == contestant.Name);
+
+            if (cont == null) { return Json("Error"); }
+
+            if (user == null)
+            {
+                var add = _context.Users.Add(new User() { Username = contestant.UserName });
+                user = add.Entity;
+            }
+
+            cont.User = user;
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json($"Error! {ex}");
+            }
+
+
+
+            return Json($"Saved for {contestant.UserName}");
+        }
     }
 }
 

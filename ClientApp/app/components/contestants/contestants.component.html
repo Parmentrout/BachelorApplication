@@ -1,20 +1,27 @@
 <div class="container-fluid">
     <h2>The Contestants</h2><em>Click and Save to show as eliminated: </em>
     <button class="btn btn-default" (click)="saveChanges()">Save Changes</button>
+    <div>Toggle Eliminated Constestants</div>
+    <input type="checkbox" [(attr.checked)]="checkBoxActive" (click)="toggleCheckbox()"/>
     <div *ngFor="let contestant of contestants">
-        <div class="text-center">
+        <div *ngIf="contestant.isActive || (!checkBoxActive && !contestant.isActive)" class="text-center">
+            <h4>{{contestant.name}}<span *ngIf="!contestant.isActive" class="text-danger"> - Eliminated!</span></h4>
             <button class="img-button" (click)="toggleContestant(contestant)">
                 <img class="img-responsive" [style.opacity]="contestant.isActive ? '1' :'0.4'" [attr.src]="contestant.imageSource" alt="No Image"/>
             </button>
-            <h4>{{contestant.name}}<span *ngIf="!contestant.isActive" class="text-danger"> - Eliminated!</span></h4>
+            <br />
+            <button class="btn btn-xs" (click)="saveFantasy('Amber',contestant.name)">Amber</button>
+            <button class="btn btn-xs" (click)="saveFantasy('Patrick',contestant.name)">Patrick</button>
+            <button class="btn btn-xs" (click)="saveFantasy('Unassigned',contestant.name)">Remove</button>
+            <br /><br />
         </div>
     </div>
 </div>
 
 <style>
     img {
-        height: 125px;
-        width: 300px;
+        height: 200px;
+        width: 200px;
     }
 
     .img-button {

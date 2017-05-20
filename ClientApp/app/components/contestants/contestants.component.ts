@@ -9,6 +9,7 @@ import { Contestant } from '../../models/contestant.component';
 })
 export class ContestantsComponent implements AfterViewInit {
     public contestants: Contestant[];
+    checkBoxActive: boolean = false;
 
     constructor(private http: Http, private _cService: ContestantsService) {
        
@@ -17,6 +18,10 @@ export class ContestantsComponent implements AfterViewInit {
     ngAfterViewInit(): void {
         this._cService.getContestants()
             .subscribe(result => this.contestants = result);
+    }
+
+    toggleCheckbox(): void {
+        this.checkBoxActive = !this.checkBoxActive;
     }
 
     toggleContestant(contestant: Contestant): void {
@@ -28,5 +33,9 @@ export class ContestantsComponent implements AfterViewInit {
 
         this._cService.saveContestants(this.contestants);
        
+    }
+
+    saveFantasy(user: string, contestant: string) {
+        this._cService.saveFantasy(user, contestant);
     }
 }

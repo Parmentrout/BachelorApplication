@@ -27,6 +27,9 @@ namespace BachelorApplication.Repository
         [NotMapped]
         public bool HasChanged { get; set; }
 
+        [NotMapped]
+        public string UserName { get; set; }
+
         public virtual User User { get; set; }
     }
 }

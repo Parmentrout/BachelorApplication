@@ -22,4 +22,17 @@ export class ContestantsService {
                 alert(result.json());
             });
     }
+
+    saveFantasy(user: string, contestant: string) {
+        let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+        let options = new RequestOptions({ headers: headers });
+        let data = new Contestantcomponent.Contestant();
+        data.name = contestant;
+        data.userName = user;
+
+        this._http.post('/api/SampleData/SaveFantasy', data, options)
+            .subscribe(result => {
+                alert(result.json());
+            });
+    }
 }
